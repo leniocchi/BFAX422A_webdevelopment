@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+  version: 1.0.11
+tags:
+  - name: Message
+    description: ah
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /chat:
+    post:  
+      tags:
+        - Message
+      summary: Update an existing Message
+      description: Update an existing pet by Id
+      operationId: updatePet
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        author:
+          type: string
+          format: enum
+            - user
+            - system
+            - ai
